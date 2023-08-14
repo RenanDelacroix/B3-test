@@ -1,10 +1,7 @@
 ﻿using Xunit;
-using Moq;
 using Microsoft.Extensions.Options;
-using App.AplicationCore.Interfaces;
 using App.AplicationCore.Services;
 using App.CrossCutting.Settings.Options;
-using ApiResult;
 using App.AplicationCore.DTOs;
 
 namespace App.Tests
@@ -25,7 +22,13 @@ namespace App.Tests
         {
             // Arrange
             var feePercentageOptions = Options.Create(new FeePercentageOptions { CDI = (decimal)CDI, TB = (decimal)TB });
-            var taxPercentageOptions = Options.Create(new TaxPercentageOptions { UpTo6Months = (decimal)UpTo6Months, UpTo12Months = (decimal)UpTo12Months, UpTo24Months = (decimal)UpTo24Months, MoreThan24Months = (decimal)MoreThan24Months });
+            var taxPercentageOptions = Options.Create(new TaxPercentageOptions 
+            { 
+                UpTo6Months = (decimal)UpTo6Months, 
+                UpTo12Months = (decimal)UpTo12Months, 
+                UpTo24Months = (decimal)UpTo24Months, 
+                MoreThan24Months = (decimal)MoreThan24Months 
+            });
             var investmentCalculatorService = new InvestmentCalculatorService(feePercentageOptions, taxPercentageOptions);
 
             // Act
@@ -42,8 +45,13 @@ namespace App.Tests
         {
             // Arrange
             var feePercentageOptions = Options.Create(new FeePercentageOptions { CDI = (decimal)CDI, TB = (decimal)TB });
-            var taxPercentageOptions = Options.Create(new TaxPercentageOptions { UpTo6Months = (decimal)UpTo6Months, UpTo12Months = (decimal)UpTo12Months, UpTo24Months = (decimal)UpTo24Months, MoreThan24Months = (decimal)MoreThan24Months });
-            var investmentCalculatorService = new InvestmentCalculatorService(feePercentageOptions, taxPercentageOptions);
+            var taxPercentageOptions = Options.Create(new TaxPercentageOptions
+            {
+                UpTo6Months = (decimal)UpTo6Months,
+                UpTo12Months = (decimal)UpTo12Months,
+                UpTo24Months = (decimal)UpTo24Months,
+                MoreThan24Months = (decimal)MoreThan24Months
+            }); var investmentCalculatorService = new InvestmentCalculatorService(feePercentageOptions, taxPercentageOptions);
 
             // Act
             var result = await investmentCalculatorService.CalculateCdbSimulation(-100, 0);
@@ -61,8 +69,13 @@ namespace App.Tests
         {
             // Arrange
             var feePercentageOptions = Options.Create(new FeePercentageOptions { CDI = (decimal)CDI, TB = (decimal)TB});
-            var taxPercentageOptions = Options.Create(new TaxPercentageOptions { UpTo6Months = (decimal)UpTo6Months, UpTo12Months = (decimal)UpTo12Months, UpTo24Months = (decimal)UpTo24Months, MoreThan24Months = (decimal)MoreThan24Months});
-            var investmentCalculatorService = new InvestmentCalculatorService(feePercentageOptions, taxPercentageOptions);
+            var taxPercentageOptions = Options.Create(new TaxPercentageOptions
+            {
+                UpTo6Months = (decimal)UpTo6Months,
+                UpTo12Months = (decimal)UpTo12Months,
+                UpTo24Months = (decimal)UpTo24Months,
+                MoreThan24Months = (decimal)MoreThan24Months
+            }); var investmentCalculatorService = new InvestmentCalculatorService(feePercentageOptions, taxPercentageOptions);
 
             // Act
             var result = await investmentCalculatorService.CalculateCdbSimulation(amount, months);
