@@ -12,7 +12,7 @@
   - E para a execução dos testes o comando **ng test**.
 ### .NETCORE
 - Aplicação WebApi em .netcore 6.0, garantir esta versão instalada na máquina.
-- Para execução dos testes unitários, pelo terminal, basta estar na pasta WebPage da solução e executar o comando "dotnet test". 
+- Para execução dos testes unitários, pelo terminal, basta estar na pasta App.Test da solução e executar o comando "dotnet test". 
  
 #### Importante
 >Ao executar esta aplicação, lembre-se de deixar as portas **7217 e 4200** livres para que o site e a api as utilizem.
