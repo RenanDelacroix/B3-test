@@ -83,6 +83,7 @@ export class AppComponent {
   }
 
   formatInput(event: any): void {
+    this.restrictToNumbers(event); 
     const input = event.target as HTMLInputElement;
     const unformattedValue = input.value.replace(/[^\d]/g, ''); 
 

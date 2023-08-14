@@ -70,7 +70,7 @@
 
     <div class="input-group">
       <label for="valor">Valor Monetário:</label>
-      <input type="text" id="valor" [(ngModel)]="formattedAmount" (input)="formatInput($event)">
+      <input type="text" pattern="[0-9]*" id="valor" [(ngModel)]="formattedAmount" (input)="formatInput($event)">
     </div>
 
     <div class="input-group">
