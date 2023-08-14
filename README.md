@@ -28,7 +28,7 @@ Porta 4200 livre para aplicação Angular
 | Angular CLI | 16.2.0 |
 | NPM | 9.8.1 |
 | .Netcore | 6.0 |
-| .NetFramework | 4.0 |
+| .NetFramework | 4.0 ou 4.8|
 | SDKs | 2.0 a 7.0.100 instaladas na máquina original |
 
 ## Development server
