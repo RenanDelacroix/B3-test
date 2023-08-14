@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App.CrossCutting.Settings",
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "WebPage", "WebPage\", "{07F3EB68-5D60-4E27-AB4F-F27BAFF9F122}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
 		Debug.AspNetCompiler.VirtualPath = "/localhost_58547"
 		Debug.AspNetCompiler.PhysicalPath = "WebPage\"
 		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_58547\"
