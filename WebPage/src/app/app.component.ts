@@ -13,12 +13,14 @@ import { catchError } from 'rxjs/operators';
 export class AppComponent {
   title = 'calculadora-aplicacoes';
 
-  formattedAmount: string = '';
+  formattedAmount: string = '1,00';
   decimalSeparator: string = ','; 
   term: number = 1;
+  treatedTerm: number = 0;
   netAmountResult: number = 0;
   grossAmountResult: number = 0;
   errorMessage: string = '';
+  validMessage: string = '';
   showErrorMessage: boolean = false;
 
   constructor(
@@ -34,11 +36,13 @@ export class AppComponent {
       amountWithoutFormat = '0';
     }
     if (isNaN(this.term) || this.term === undefined || this.term === null) {
-      this.term = 1;
+      this.treatedTerm = 0;
+    } else {
+      this.treatedTerm = this.term
     }
 
     this.http
-      .get<any>(this.appConfigService.apiCdbUrl + amountWithoutFormat + '/' + this.term)
+      .get<any>(this.appConfigService.apiCdbUrl + amountWithoutFormat + '/' + this.treatedTerm)
       .pipe(
         catchError((error) => {
           if (error.status === 400) {
@@ -46,21 +50,26 @@ export class AppComponent {
             if (responseError && responseError.success === false && responseError.message) {
               this.setErrorMessage(responseError.message);
               this.showErrorMessage = true;
+              this.validMessage = '';
             } else {
               this.toastr.error('Necessário passar valores numéricos validos', 'Erro na requisição:');
+              this.validMessage = '';
             }
           } else {
             this.toastr.error('Ocorreu um erro ao processar a solicitação.', 'Erro');
             this.showErrorMessage = true;
+            this.validMessage = '';
           }
           console.error('Erro na requisição:', error);
           throw new Error('Erro na requisição');
+          this.validMessage = '';
         })
       )
       .subscribe((response) => {
         if (response && response.success) {
           this.netAmountResult = response.data.netAmount;
           this.grossAmountResult = response.data.grossAmount;
+          this.validMessage = 'Simulados: R$' + this.formattedAmount + ' por ' + this.treatedTerm + ` ${this.treatedTerm > 1 ? 'meses' : 'mês'} `;
         }
       });
   }
