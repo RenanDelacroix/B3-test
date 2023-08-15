@@ -70,12 +70,12 @@
 
     <div class="input-group">
       <label for="valor">Valor Monetário:</label>
-      <input type="text" pattern="[0-9]*" id="valor" [(ngModel)]="formattedAmount" (input)="formatInput($event)">
+      <input type="text" pattern="[0-9]*" id="valor" [(ngModel)]="formattedAmount" (keydown)="onKeyDown($event)" (input)="formatInput($event)">
     </div>
 
     <div class="input-group">
       <label for="prazo">Prazo em Meses:</label>
-      <input type="number" id="prazo" [(ngModel)]="term" required min="1" (input)="restrictToNumbers($event)">
+      <input type="number" id="prazo" [(ngModel)]="term" required min="1" (keydown)="onKeyDown($event)" (input)="restrictToNumbers($event)">
     </div>
     <label for="bruto">Valor bruto:</label>
     <div class="result" *ngIf="grossAmountResult !== undefined">

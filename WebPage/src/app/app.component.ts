@@ -15,7 +15,7 @@ export class AppComponent {
 
   formattedAmount: string = '';
   decimalSeparator: string = ','; 
-  term: number = 0;
+  term: number = 1;
   netAmountResult: number = 0;
   grossAmountResult: number = 0;
   errorMessage: string = '';
@@ -34,7 +34,7 @@ export class AppComponent {
       amountWithoutFormat = '0';
     }
     if (isNaN(this.term) || this.term === undefined || this.term === null) {
-      this.term = 0;
+      this.term = 1;
     }
 
     this.http
@@ -82,8 +82,17 @@ export class AppComponent {
     return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
+  onKeyDown(event: KeyboardEvent) {
+    const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'];
+    const inputElement = event.target as HTMLInputElement;
+    const key = event.key;
+
+    if (!allowedKeys.includes(key) && isNaN(parseFloat(key))) {
+      event.preventDefault();
+    }
+  }
+
   formatInput(event: any): void {
-    this.restrictToNumbers(event); 
     const input = event.target as HTMLInputElement;
     const unformattedValue = input.value.replace(/[^\d]/g, ''); 
 
@@ -96,4 +105,6 @@ export class AppComponent {
     const formattedValue = this.formatNumber(intValue / 100); 
     this.formattedAmount = formattedValue; 
   }
+
+  
 }
