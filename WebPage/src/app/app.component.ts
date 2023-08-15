@@ -13,7 +13,7 @@ import { catchError } from 'rxjs/operators';
 export class AppComponent {
   title = 'calculadora-aplicacoes';
 
-  formattedAmount: string = '1,00';
+  formattedAmount: string = '0,00';
   decimalSeparator: string = ','; 
   term: number = 1;
   treatedTerm: number = 0;
@@ -79,7 +79,7 @@ export class AppComponent {
     this.showErrorMessage = true;
     setTimeout(() => {
       this.showErrorMessage = false;
-    }, 4000); 
+    }, 5000); 
   }
 
   restrictToNumbers(event: any): void {
@@ -91,7 +91,18 @@ export class AppComponent {
     return value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
-  onKeyDown(event: KeyboardEvent) {
+  onKeyDown(event: KeyboardEvent, inputId: string) {
+    if (inputId === 'valor' && event.key === 'Enter') {
+      const nextElement = document.getElementById('prazo') as HTMLInputElement;
+      if (nextElement) {
+        nextElement.focus();
+      }
+    } else if (inputId === 'prazo' && event.key === 'Enter') {
+      const button = document.getElementById('calc-button') as HTMLButtonElement;
+      if (button) {
+        button.click();
+      }
+    }
     const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete'];
     const inputElement = event.target as HTMLInputElement;
     const key = event.key;

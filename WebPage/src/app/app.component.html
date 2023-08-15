@@ -73,12 +73,12 @@
 
     <div class="input-group">
       <label for="valor">Valor Monetário:</label>
-      <input type="text" title = "O valor deve ser positivo e no mínimo 1,00" pattern="[0-9]*" id="valor" [(ngModel)]="formattedAmount" (keydown)="onKeyDown($event)" (input)="formatInput($event)">
+      <input type="text" title = "O valor deve ser positivo e no mínimo 1,00" pattern="[0-9]*" id="valor" [(ngModel)]="formattedAmount" (keydown)="onKeyDown($event, 'valor')" (input)="formatInput($event)">
     </div>
 
     <div class="input-group">
       <label for="prazo">Prazo em Meses:</label>
-      <input type="number" title = "Mínimo de 1 mês de prazo" id="prazo" [(ngModel)]="term" required min="1" (keydown)="onKeyDown($event)" (input)="restrictToNumbers($event)">
+      <input type="number" title = "Mínimo de 1 mês de prazo" id="prazo" [(ngModel)]="term" required min="1" (keydown)="onKeyDown($event, 'prazo')" (input)="restrictToNumbers($event)">
     </div>
     <label for="bruto">Valor bruto:</label>
     <div class="result" *ngIf="grossAmountResult !== undefined">
@@ -96,7 +96,7 @@
     <div class="valid-message" *ngIf="!showErrorMessage">{{ validMessage }}</div>
   </div>
   <div class="button-container">
-    <button class="calcular-button" (click)="calculate()">Calcular</button>
+    <button id="calc-button" class="calcular-button" (click)="calculate()">Calcular</button>
   </div>
   <div class="error-message" *ngIf="showErrorMessage">{{ errorMessage }}</div>
 </div>
