@@ -88,8 +88,8 @@
     </div>
     <br />
     <label for="liquido">Valor líquido:</label>
-    <div class="result" *ngIf="netAmountResult !== undefined">
-      <div class="resultado-liquido">
+    <div class="result" *ngIf="netAmountResult !== undefined" [class.highlighted]="fieldHighlighted">
+      <div class="resultado-liquido" >
         <p id="liquido"> R$ {{ formatNumber(netAmountResult) }}</p>
       </div>
     </div>
@@ -100,7 +100,9 @@
   </div>
   <div class="error-message" *ngIf="showErrorMessage">{{ errorMessage }}</div>
 </div>
-
+<div class="loading-container" *ngIf="showLoading">
+  <div class="loading-arrow"></div>
+</div>
 
 
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AppConfigService } from '../services/app-config.service';
 import { ToastrService } from 'ngx-toastr';
@@ -10,9 +10,8 @@ import { catchError } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent {
+export class AppComponent{
   title = 'calculadora-aplicacoes';
-
   formattedAmount: string = '0,00';
   decimalSeparator: string = ','; 
   term: number = 1;
@@ -22,6 +21,9 @@ export class AppComponent {
   errorMessage: string = '';
   validMessage: string = '';
   showErrorMessage: boolean = false;
+  showLoading = false;
+  fieldHighlighted: boolean = false;
+
 
   constructor(
     private appConfigService: AppConfigService,
@@ -30,6 +32,7 @@ export class AppComponent {
   ) { }
 
   calculate(): void {
+    this.loading();
     let amountWithoutFormat = this.formattedAmount.toString().replace(/\./g, '').replace(',', '.');
 
     if (isNaN(parseFloat(amountWithoutFormat))) {
@@ -70,6 +73,7 @@ export class AppComponent {
           this.netAmountResult = response.data.netAmount;
           this.grossAmountResult = response.data.grossAmount;
           this.validMessage = 'Simulados: R$' + this.formattedAmount + ' por ' + this.treatedTerm + ` ${this.treatedTerm > 1 ? 'meses' : 'mês'} `;
+          this.highLightFiled();
         }
       });
   }
@@ -126,5 +130,21 @@ export class AppComponent {
     this.formattedAmount = formattedValue; 
   }
 
-  
+  loading() {
+    this.showLoading = true;
+    
+
+    setTimeout(() => {
+      this.showLoading = false;
+    }, 600);
+
+    
+  }
+
+  highLightFiled() {
+    this.fieldHighlighted = true;
+    setTimeout(() => {
+      this.fieldHighlighted = false;
+    }, 1500);
+  }
 }
